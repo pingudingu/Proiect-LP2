@@ -68,7 +68,21 @@ def Histogram_Equalization(Image, Min, Max):
 
 
 def main():
-    
+    folder_dir = "C:\\Users\\andre\\Desktop\\LP2\\Proiect-LP2"
+    for images in os.listdir(folder_dir):
+        if (images.endswith(".png")):
+            img = cv2.imread(images)
+            if is_low_contrast(img, 0.35):
+                print(images)
+                Input_Image = cv.imread(images)  # This is to read the color Image
+
+                Histogram_GrayScale, Min, Max = Histogram_Computation(Input_Image)
+
+                New_Image = Histogram_Equalization(Input_Image, Min, Max)
+                # Now to print our output Histogram
+                new_name = images.split('.')
+                cv.imwrite(new_name[0] + '_procesata.png', New_Image)
+                input("Please Enter to Continue...")
 
 
 if __name__ == '__main__':
